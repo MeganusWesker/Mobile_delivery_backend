@@ -56,3 +56,32 @@ export const logout = catchAsyncErrors(async (req, res, next) => {
     message: "loged out sucessfully",
   });
 });
+
+
+export const getAllUsers = catchAsyncErrors(async (req, res, next) => {
+  const users = await User.find();
+  res.status(200).json({
+      success: true,
+      users,
+  });
+});
+
+export const updateUser = catchAsyncErrors(async (req, res, next) => {
+  const user = (await User.findById(req.params.id));
+  if (!user) {
+      return next(new ErrorHandler("user not found", 404));
+  }
+ 
+  if (user.role === "user") {
+      user.role = "admin";
+  }
+  else {
+      user.role = "user";
+  }
+
+  await user.save();
+  res.status(200).json({
+      success: true,
+      message: "user updated successfully",
+  });
+});

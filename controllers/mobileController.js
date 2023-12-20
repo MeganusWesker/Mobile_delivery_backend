@@ -128,3 +128,11 @@ export const getAllMobile = catchAsyncErrors(async (req, res, next) => {
         mobiles
     });
 });
+
+export const getAllMobiles = catchAsyncErrors(async (req, res, next) => {
+    const mobiles = await Mobile.find();
+    res.status(200).json({
+        success: true,
+        mobiles,
+    });
+  });
