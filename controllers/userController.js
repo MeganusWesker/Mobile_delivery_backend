@@ -66,6 +66,15 @@ export const getAllUsers = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+
+export const getMyProfile = catchAsyncErrors(async (req, res, next) => {
+  const user = (await User.findById(req.user._id));
+  res.status(200).json({
+      success: true,
+      user,
+  });
+});
+
 export const updateUser = catchAsyncErrors(async (req, res, next) => {
   const user = (await User.findById(req.params.id));
   if (!user) {
