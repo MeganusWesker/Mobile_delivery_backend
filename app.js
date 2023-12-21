@@ -32,9 +32,9 @@ import mobile from "./routes/mobileRoute.js";
 app.use('/api/v1',user);
 app.use('/api/v1',mobile);
 
-app.get('/', (req, res) => {
+app.get('/',(req,res)=>{
     res.send("working");
-});
+})
 
 export default app;
 
